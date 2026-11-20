@@ -1,0 +1,13 @@
+{
+  "tasks": {
+    "test": "deno test --allow-run=node --allow-env --allow-read --allow-write --allow-net backend/test/deno.test.ts",
+    "test:node": "node backend/test/e2e.mjs && node backend/test/premium.mjs",
+    "test:all": "deno task test && deno task test:node"
+  },
+  "fmt": {
+    "lineWidth": 120,
+    "indentWidth": 2,
+    "semiColons": true,
+    "singleQuote": true
+  }
+}

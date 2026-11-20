@@ -1,0 +1,24 @@
+# Render Blueprint. Dashboard: New > Blueprint > pick this repo. Then fill the secret values it asks for.
+services:
+  - type: web
+    name: beyond-ai-backend
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: .
+    plan: standard            # video rendering needs real CPU/RAM; free/starter plans will time out or run out of memory
+    healthCheckPath: /api/health
+    disk:
+      name: beyond-data
+      mountPath: /data
+      sizeGB: 20
+    envVars:
+      - { key: ANTHROPIC_API_KEY, sync: false }
+      - { key: OPENAI_API_KEY, sync: false }
+      - { key: PREMIUM_DAILY_CODES, sync: false }
+      - { key: PREMIUM_UNLIMITED_CODES, sync: false }
+      - { key: PREMIUM_REQUIRED, value: "true" }
+      - { key: ALLOWED_ORIGINS, sync: false }   # e.g. https://your-site.netlify.app
+      - { key: PUBLIC_URL, sync: false }        # e.g. https://beyond-ai-backend.onrender.com
+      - { key: TRUST_PROXY, value: "true" }
+      - { key: SERVE_FRONTEND, value: "false" }
+      - { key: DATA_DIR, value: /data }

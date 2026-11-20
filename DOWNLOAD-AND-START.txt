@@ -1,0 +1,43 @@
+# BEYOND AI — Website + Backend Bundle
+
+This ZIP contains the BEYOND AI HTML website and its Node.js backend.
+
+## 1. Requirements
+- Node.js 20.3 or newer
+- FFmpeg and FFprobe installed and available in PATH
+- An Anthropic API key for AI editing-plan generation
+- Optional: an OpenAI API key for speech-to-text captions
+
+## 2. Start locally
+1. Extract this ZIP.
+2. Open a terminal in the extracted `beyond-ai/backend` folder.
+3. Copy `.env.example` to `.env`.
+4. Add your provider API key(s) to `.env`. Keep secret keys in `.env`, never in the HTML.
+5. Run `npm start`.
+6. Open http://localhost:8787/BEYOND-AI.html
+
+The backend serves the website and API together. Keep the terminal/server running while using the website.
+
+## 3. Premium codes
+Configure your own `PREMIUM_DAILY_CODES` and `PREMIUM_UNLIMITED_CODES` in `backend/.env`.
+Do not publish real premium codes or API keys in a public repository.
+
+## 4. Tests
+From `beyond-ai/backend`:
+- `npm test` — runs the Node.js backend end-to-end and Premium tests.
+- `npm run test:deno` — runs the Deno smoke test (Deno must be installed).
+- `npm run test:all` — runs both suites.
+
+Deno test configuration is included, but the Deno test has not been run in this build environment.
+
+## 5. Hosting
+The HTML file alone cannot run Node.js, FFmpeg, or the backend. Host the backend on a Node.js-compatible service (for example Render or a VPS), configure the environment variables, and set the frontend API URL to the backend's HTTPS URL if hosting the frontend separately. See `README.md` for deployment details.
+
+## Project structure
+- `public/BEYOND-AI.html` — website page
+- `public/index.html` — same page, default entry point
+- `backend/server.js` — HTTP server and API routes
+- `backend/planner.js` — AI planning integration
+- `backend/pipeline.js` — FFmpeg video processing
+- `backend/premium.js` — server-side Premium validation
+- `backend/test/` — automated tests
