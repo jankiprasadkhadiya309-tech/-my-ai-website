@@ -1,0 +1,30 @@
+BEYOND AI - complete website + AI backend
+
+REQUIREMENTS
+  - Node.js 20.3 or newer      (https://nodejs.org)
+  - FFmpeg + FFprobe in PATH   (https://ffmpeg.org)
+  - Anthropic API key          (for the AI editing planner)
+  - Optional: OpenAI API key   (speech-to-text captions)
+  No "npm install" needed: the backend has zero dependencies.
+
+START
+  1. Open backend/.env and set:  ANTHROPIC_API_KEY=sk-ant-...
+  2. Run:   Mac/Linux:  ./start-local.sh      Windows: double-click start-local.bat
+     (or:   cd backend && npm start)
+  3. Open:  http://localhost:8787
+  4. On your phone (same Wi-Fi): http://<your-computer-IP>:8787
+
+PREMIUM CODES (local dev only - change them in backend/.env before going public)
+  PREMIUM_DAILY_CODES=DEV-DAILY-2026        (1 export per 24h)
+  PREMIUM_UNLIMITED_CODES=DEV-UNLIMITED-2026 (30 days unlimited)
+
+TESTS
+  cd backend && npm test
+
+FOLDERS
+  backend/   server.js (API + static site), planner.js (AI plan), pipeline.js + media.js (FFmpeg),
+             captions.js, premium.js, planSchema.js, test/
+  public/    index.html + BEYOND-AI.html (your website), config.js
+  scripts/   make-config.js (Netlify build)
+  render.yaml, netlify.toml, backend/Dockerfile  (deployment)
+  README.md  full documentation

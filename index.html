@@ -171,10 +171,12 @@ html.gold .top{background:rgba(3,3,3,.92);border-bottom-color:#3d2f08}
 <script src="https://cdn.jsdelivr.net/npm/htm@3.1.1/dist/htm.umd.js"></script>
 <!-- Backend URL. config.js is served by the backend itself (and generated on Netlify from BEYOND_API_URL); if it is absent the fallback below applies.
      Opened straight from disk (file://) the page talks to the local backend on http://localhost:8787. Hosted anywhere else with no config.js, the UI says "Backend not connected" instead of pretending. -->
+<script src="config.js"></script>
 <script>
-/* Single-file frontend configuration.
-   Keep the backend running and set this URL to your deployed backend when hosting online. */
-window.BEYOND_CONFIG = { apiUrl: "http://localhost:8787" };
+/* Backend URL resolution. 1) config.js (served by the backend, or generated on Netlify) sets window.BEYOND_CONFIG.apiUrl.
+   2) If it did not provide a URL and this page was opened straight from disk (file://), use the local backend on http://localhost:8787.
+   3) Otherwise apiUrl stays empty and the UI says "Backend not connected" instead of pretending. */
+(function(){var c=window.BEYOND_CONFIG;if(!c||typeof c.apiUrl!=="string"||!c.apiUrl.trim()){window.BEYOND_CONFIG={apiUrl:location.protocol==="file:"?"http://localhost:8787":""}}})();
 </script>
 <script>
 const {useState,useRef,useEffect,useCallback}=React;
